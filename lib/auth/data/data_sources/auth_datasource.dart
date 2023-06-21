@@ -1,3 +1,4 @@
+import 'package:alpha_tdd/core/network/remote.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -13,21 +14,13 @@ class AuthRemoteDataSource implements BaseAuthRemoteDataSource {
 
   @override
   Future<Unit> login(String numberPhone,String dailCode) async{
-     final response = await Dio(
-        BaseOptions(
-            receiveDataWhenStatusError: true,
-            receiveTimeout: const Duration(seconds: 5),
-            connectTimeout: const Duration(seconds: 6),
-            headers: {
-              'Content-Type':'multipart/form-data',
-              'Accept':'text/plain'
-            })
-    ).post('http://52.91.25.191:85/api/Account/LogIn?dialCode=%2B963&phoneNumber=$numberPhone');
-
+    final response=await DioHelper.postData(url: 'Account/LogIn?dialCode=%2B963&phoneNumber=$numberPhone', data: {});
     if (response.statusCode == 200) {
      print('200');
+     print('success');
      return Future.value(unit);
     } else {
+
       throw ServerException(
         errorMessageModel: ErrorMessageModel.fromJson(response.data),
       );

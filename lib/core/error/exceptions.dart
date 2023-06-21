@@ -6,17 +6,16 @@
 import '../network/error_message_model.dart';
 
 class ServerException implements Exception {
-  final ErrorMessageModel errorMessageModel;
+  final String? message;
 
-  const ServerException({
-    required this.errorMessageModel,
-  });
+  ServerException({this.message = "ServerException"});
 }
 
-class LocalDatabaseException implements Exception {
-  final String message;
 
-  const LocalDatabaseException({
-    required this.message,
-  });
-}
+// class OfflineException implements Exception{
+//   final String message;
+//
+//   const OfflineException({
+//     required this.message,
+//   });
+// }

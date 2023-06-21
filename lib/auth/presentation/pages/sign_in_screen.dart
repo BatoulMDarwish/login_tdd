@@ -2,6 +2,7 @@ import 'package:alpha_tdd/auth/presentation/widgets/toast_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toast/toast.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_string.dart';
 import '../manager/auth_bloc.dart';
@@ -26,9 +27,9 @@ class SignInScreen extends StatelessWidget {
        if(state is LoginSuccessState){
          Navigator.pushNamed(context, "/home");
        }
-       // if(state is ErrorLoginState){
-       //  showToast(text: state.message, state: ToastStates.ERROR);
-       // }
+     if(state is ErrorLoginState){
+       Toast.show("Toast plugin app", duration: Toast.lengthShort, gravity:  Toast.bottom);
+        }
       },
       builder: (context, state) {
         return Scaffold(

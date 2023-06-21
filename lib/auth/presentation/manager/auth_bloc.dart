@@ -14,15 +14,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _login(LoginEvent event ,Emitter<AuthState> emit) async{
    emit(LoadingLoginState());
-    print('mmmmmmmm');
+
     final result = await loginUseCase(event.numberPhone,event.dailCode);
     result.fold(
-          (l) => emit(ErrorLoginState(message:l.message )
-      ),
-          (r) => emit(
-        LoginSuccessState()
-      ),
-    );
+          (l) {
+            print('error');
+          return
+          emit(ErrorLoginState(message: l.message));
+          }
+      ,
+          (r)           {
+            return  emit(LoginSuccessState());
+            },);
     print('result=$result');
   }
 }

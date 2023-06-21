@@ -1,18 +1,33 @@
+import 'package:alpha_tdd/core/error/status_code_type.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class Failure extends Equatable {
+abstract class Failure {
   final String message;
-
-  const Failure(this.message);
+  final StatusCode statusCode;
+  const Failure(this.message, this.statusCode);
 
   @override
   List<Object> get props => [message];
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  const ServerFailure({String? message, StatusCode statusCode = StatusCode.serverError})
+      : super(message ?? "ServerFailure", statusCode);
 }
 
-class DatabaseFailure extends Failure {
-  const DatabaseFailure(super.message);
+class DioFailure extends Failure {
+  const DioFailure({
+    String? message,
+    StatusCode statusCode = StatusCode.operationFailed,
+  }) : super(message ?? "DioFailure", statusCode);
+
+  @override
+  String toString() {
+    return 'DioFailure{message: $message, statusCode:$statusCode}';
+  }
 }
+
+// class OfflineFailure extends Failure{
+//   const OfflineFailure(super.message);
+//
+// }

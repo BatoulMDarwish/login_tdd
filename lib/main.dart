@@ -6,8 +6,10 @@ import 'auth/presentation/pages/home.dart';
 import 'auth/presentation/pages/sign_in_screen.dart';
 import 'auth/presentation/pages/splash_screen.dart';
 import 'auth/presentation/pages/welcom_screen.dart';
+import 'core/network/remote.dart';
 import'core/services/services_locator.dart';
 void main() {
+  DioHelper.init();
   ServicesLocator().init();
   runApp(const MyApp());
 }
