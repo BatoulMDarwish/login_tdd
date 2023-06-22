@@ -18,7 +18,7 @@ class AuthRepository  implements BaseAuthRepository{
     try {
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.errorMessage));
+      return Left(ServerFailure());
     }
   }
   

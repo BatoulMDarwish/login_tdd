@@ -6,9 +6,10 @@ import 'auth/presentation/pages/home.dart';
 import 'auth/presentation/pages/sign_in_screen.dart';
 import 'auth/presentation/pages/splash_screen.dart';
 import 'auth/presentation/pages/welcom_screen.dart';
-import 'core/network/remote.dart';
+import 'core/network/post.dart';
 import'core/services/services_locator.dart';
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   ServicesLocator().init();
   runApp(const MyApp());

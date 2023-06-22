@@ -81,7 +81,6 @@ abstract class HandlingExceptionRequest {
               orElse: () => StatusCode.serverError)));
     } catch (e, stackTrace) {
       //await FirebaseCrashlytics.instance.recordError(e, stackTrace, reason: "catch Error.", fatal: true);
-
       prettyPrinterError(
         "***|| CATCH ERROR ||***"
         "\n $e"

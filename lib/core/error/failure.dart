@@ -7,7 +7,7 @@ abstract class Failure {
   const Failure(this.message, this.statusCode);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message,statusCode];
 }
 
 class ServerFailure extends Failure {
