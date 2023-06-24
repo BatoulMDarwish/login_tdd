@@ -28,6 +28,7 @@ class SignInScreen extends StatelessWidget {
          Navigator.pushNamed(context, "/home");
        }
      if(state is ErrorLoginState){
+       ToastContext().init(context);
        Toast.show("Toast plugin app", duration: Toast.lengthShort, gravity:  Toast.bottom);
         }
       },
