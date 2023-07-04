@@ -20,7 +20,7 @@ class AuthRepository  extends BaseAuthRepository with HandlingExceptionRequest{
     final result = await baseAuthRemoteDataSource.login(numberPhone,dailCode);
       return Right(result);
     } catch (failure) {
-      return Left(ServerFailure());
+      return const Left(ServerFailure());
     }
   }
   
