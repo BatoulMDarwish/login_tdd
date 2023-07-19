@@ -24,6 +24,8 @@ void main() async {
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/lang',
+      startLocale: const Locale('ar'),
+      saveLocale: true,
       fallbackLocale: Locale('en'),
       child: MyApp(),
     ),
