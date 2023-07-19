@@ -1,8 +1,11 @@
-import 'package:alpha_tdd/core/localization/app_localizations.dart';
+
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/localization/controller/cubit/locale_cubit.dart';
+import '../../../core/localization/controller/cubit/locale_state.dart';
 import '../../../core/utils/app_color.dart';
 
 
@@ -13,8 +16,8 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: AppColor.pink,
-        title: Text("settings".tr(context)),
+        backgroundColor: AppColor.pink,
+        title: Text("settings".tr()),
       ),
       body: Column(
         children: [
@@ -37,7 +40,9 @@ class SettingsPage extends StatelessWidget {
                       }).toList(),
                       onChanged: (String? newValue) {
                         if (newValue != null) {
+                            print(newValue);
                           context.read<LocaleCubit>().changeLanguage(newValue);
+                          print("don't have account".tr());
                         }
                         Navigator.pushNamed(context, '/welcome');
                       },
@@ -45,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 )),
           ),
-          ElevatedButton(onPressed: (){Navigator.pushNamed(context, '/welcome');}, child: Text("skip".tr(context)))
+          ElevatedButton(onPressed: (){Navigator.pushNamed(context, '/welcome');}, child: Text("skip").tr())
         ],
       ),
     );

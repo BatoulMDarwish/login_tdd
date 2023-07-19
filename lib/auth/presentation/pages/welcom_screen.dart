@@ -1,4 +1,4 @@
-import 'package:alpha_tdd/core/localization/app_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/app_string.dart';
@@ -24,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
                ),
                15.verticalSpace,
                CustomButton(
-                 text:"Sign in".tr(context),
+                 text:"Sign in".tr(),
                  colorbutton: AppColor.pink,
                  colorText: AppColor.white,
                  onTap: (){
@@ -33,14 +33,14 @@ class WelcomeScreen extends StatelessWidget {
                ),
               20.verticalSpace,
                CustomButton(
-                 text: "create account".tr(context),
+                 text: "create account".tr(),
                  colorbutton: AppColor.gray,
                  colorText: AppColor.black,
                  onTap: (){},
                ),
               14.verticalSpace,
                 CustomText(
-                   text: "continue as a guest".tr(context),
+                   text: "continue as a guest".tr(),
                    color: AppColor.gray2,
                    size:17
                )
