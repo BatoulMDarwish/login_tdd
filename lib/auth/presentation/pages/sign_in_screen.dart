@@ -1,4 +1,5 @@
 import 'package:alpha_tdd/auth/presentation/widgets/toast_flutter.dart';
+import 'package:alpha_tdd/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,24 +54,24 @@ class SignInScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       CustomTextForm(
-                          hinttext:"dailCode".tr(),
+                          hinttext:LocaleKeys.dailCode.tr(),
                           isNumber: true,
                           mycontroller: dialCodeController,
                           valid: (String? value) {
                             if (value!.isEmpty) {
-                              return "please enter your dialCode".tr();
+                              return LocaleKeys.please_enter_your_dialCode.tr();
                             }
                             return null;
                           }
                       ),
                       18.verticalSpace,
                       CustomTextForm(
-                        hinttext: "number".tr(),
+                        hinttext: LocaleKeys.number.tr(),
                         isNumber: true,
                         mycontroller: numberPhoneController,
                         valid: (String? value) {
                           if (value!.isEmpty) {
-                            return "please enter your phone number".tr();
+                            return LocaleKeys.pleaseenteryourphonenumber.tr();
                           }
                           return null;
                         },
@@ -96,7 +97,7 @@ class SignInScreen extends StatelessWidget {
                               child: CustomButton(
                                 colorText: AppColor.white,
                                 colorbutton: AppColor.pink,
-                                text:"next".tr(),
+                                text:LocaleKeys.next.tr(),
                                 onTap: () {
                                   if (formKey.currentState!.validate()) {
                                     context.read<AuthBloc>().add(LoginEvent(
@@ -122,7 +123,7 @@ class SignInScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                            CustomText(
-                              text: "don't have account".tr(),
+                              text: LocaleKeys.dont_have_account.tr(),
                               color: AppColor.gray2,
                               size: 17),
                           8.horizontalSpace,
@@ -131,7 +132,7 @@ class SignInScreen extends StatelessWidget {
                               Navigator.pushNamed(context, "/signUp");
                             },
                             child:  CustomText(
-                                text: "sign up".tr(),
+                                text: LocaleKeys.sign_up.tr(),
                                 color: AppColor.pink,
                                 size: 17),
                           ),

@@ -1,5 +1,6 @@
 
 
+import 'package:alpha_tdd/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,44 +15,41 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.pink,
-        title: Text("settings".tr()),
-      ),
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: BlocConsumer<LocaleCubit, ChangeLocaleState>(
-                  listener: (context, state) {
+    return BlocBuilder<LocaleCubit,ChangeLocaleState>(
+      builder: (context, state) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColor.pink,
+          title: Text(LocaleKeys.Sign_in.tr()),
+        ),
+        body: Column(
+          children: [
+            Center(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:  DropdownButton<String>(
+                        value: state.locale.languageCode,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: ['ar', 'en'].map((String items) {
+                          return DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                              print(newValue);
+                           // context.read<LocaleCubit>().changeLanguage(newValue);
+context.setLocale(Locale(newValue));
+                          }
+                          Navigator.pushNamed(context, '/welcome');
+                        },
 
-                  },
-                  builder: (context, state) {
-                    return DropdownButton<String>(
-                      value: state.locale.languageCode,
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      items: ['ar', 'en'].map((String items) {
-                        return DropdownMenuItem<String>(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        if (newValue != null) {
-                            print(newValue);
-                          context.read<LocaleCubit>().changeLanguage(newValue);
-                          print("don't have account".tr());
-                        }
-                        Navigator.pushNamed(context, '/welcome');
-                      },
-                    );
-                  },
-                )),
-          ),
-          ElevatedButton(onPressed: (){Navigator.pushNamed(context, '/welcome');}, child: Text("skip").tr())
-        ],
+
+                  )),
+            ),
+            ElevatedButton(onPressed: (){Navigator.pushNamed(context, '/welcome');}, child: Text(LocaleKeys.skip.tr()))
+          ],
+        ),
       ),
     );
   }

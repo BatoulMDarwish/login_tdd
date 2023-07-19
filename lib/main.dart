@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'auth/presentation/manager/auth_bloc.dart';
 import 'auth/presentation/pages/home.dart';
 import 'auth/presentation/pages/sign_in_screen.dart';
@@ -12,6 +13,7 @@ import 'auth/presentation/pages/splash_screen.dart';
 import 'auth/presentation/pages/welcom_screen.dart';
 import 'core/localization/controller/cubit/locale_cubit.dart';
 import 'core/localization/controller/cubit/locale_state.dart';
+import 'core/localization/language_cach_helper.dart';
 import 'core/network/post.dart';
 import'core/services/services_locator.dart';
 
@@ -20,11 +22,13 @@ void main() async {
   DioHelper.init();
   ServicesLocator().init();
   await EasyLocalization.ensureInitialized();
+  final String cachedLanguageCode =
+  await LanguageCacheHelper(). getCachedLanguageCode();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/lang',
-      startLocale: const Locale('ar'),
+      startLocale: Locale(cachedLanguageCode),
       saveLocale: true,
       fallbackLocale: Locale('en'),
       child: MyApp(),
@@ -57,7 +61,7 @@ class MyApp extends StatelessWidget {
             BlocBuilder<LocaleCubit, ChangeLocaleState>(
               builder: (context, state) {
                 return MaterialApp(
-                  locale: state.locale,
+                  locale: context.locale,
                     supportedLocales: context.supportedLocales,
                     localizationsDelegates: context.localizationDelegates,
                     debugShowCheckedModeBanner: false,
